@@ -1,0 +1,61 @@
+<head>
+    <title>Todo List</title>
+</head>
+
+<body style="background: linear-gradient(to right, rgb(238, 238, 238), rgb(153, 240, 251), rgb(90, 166, 213));">
+    <div style="text-align: center;">
+        <div style="font-size: 20px; padding:20px; 
+                    color:#000000;
+                    font-family:Arial, Helvetica, sans-serif;
+                    border: 3px solid #333;
+                    ">
+            <h1>Todo List  📝 </h1>
+        </div>
+        <div style="padding: 10px;">
+            <input id="inp"
+            style="font-size: 22px;
+            background-color:#000000;
+            color:rgb(255, 253, 253) ;
+            gap:15px;
+            font-family:Arial, Helvetica, sans-serif
+            " 
+            type="text" placeholder="Add your Todo task here"></input>
+
+            <button id="btn"
+            style="font-size: 22px;
+            background-color:#111111;
+            color:white ;
+            font-family:Arial, Helvetica, sans-serif
+            " onclick="addTodo()"
+            >Add Task</button>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    function addTodo(){
+        const value = document.querySelector("input").value;
+        const spanEL = document.createElement("span");
+        const buttonEl = document.createElement("button");
+        spanEL.innerHTML = value;
+        buttonEl.innerHTML = "Delete";
+        
+        const divEl = document.createElement("div");
+        divEl.appendChild(spanEL);
+        divEl.appendChild(buttonEl);
+        
+        const bodyEl = document.querySelector("body");
+        bodyEl.appendChild(divEl);
+
+        buttonEl.onclick = function () {
+            divEl.remove();
+        };
+
+        document.body.appendChild(divEl);
+
+    }
+    
+
+</script>
+ 
