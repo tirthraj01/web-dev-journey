@@ -26,6 +26,12 @@
             style="font-size: 22px; background-color:#111; color:#c4c4c4;">
             Add Task
         </button>
+        
+        <button onclick="deleteLastTodo()">Delete last todo</button>
+
+        <button onclick="deleteFirstTodo()">Delete first todo</button>
+
+        <button onclick="Clear()">Clear everything </button>
     </div>
 
     <div id="todos" style="margin-top:20px;"></div>
@@ -33,39 +39,37 @@
 </div>
 
 <script>
-let todos = [];
+let todos = []; 
 
 function addTodo(){
-    const input = document.querySelector("#inp");
-    const value = input.value;
-
-    if(value === "") return; 
+    const inputEL = document.querySelector("#inp");
+    const value = inputEL.value;
 
     todos.push({
         title: value
     });
 
-    input.value = ""; 
+    inputEL.value = "";
     render();
 }
 
 function createTodo(todo){
-    const div = document.createElement("div");
+    const divEL = document.createElement("div");
 
-    const span = document.createElement("span");
-    span.innerText = todo.title;
+    const spanEL = document.createElement("span");
+    spanEL.innerHTML = todo.title; 
 
-    const button = document.createElement("button");
-    button.innerText = "Delete";
+    const buttonEl = document.createElement("button");
+    buttonEl.innerHTML = "Delete";
 
-    button.onclick = function(){
-        removeTodo(todo.title);
+    buttonEl.onclick = function(){
+        removeTodo(todo.title); 
     };
 
-    div.appendChild(span);
-    div.appendChild(button);
+    divEL.appendChild(spanEL);
+    divEL.appendChild(buttonEl);
 
-    return div;
+    return divEL; 
 }
 
 function removeTodo(title){
@@ -78,11 +82,26 @@ function removeTodo(title){
     render();
 }
 
-function render(){
+function deleteLastTodo() {
+    todos.pop();
+    render();
+}
+
+function deleteFirstTodo() {
+    todos.shift();
+    render();
+}
+
+function Clear() {
+    todos.splice(0, todos.length);
+    render();
+}
+
+function render() {
     const parent = document.querySelector("#todos");
     parent.innerHTML = "";
 
-    for(let i = 0; i < todos.length; i++){
+    for (let i = 0; i < todos.length; i++) {
         const element = createTodo(todos[i]);
         parent.appendChild(element);
     }
