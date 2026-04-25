@@ -1,1 +1,93 @@
-hey
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Todo List</title>
+</head>
+
+<body style="background: linear-gradient(to right, rgb(238, 238, 238), rgb(153, 240, 251), rgb(90, 166, 213));">
+
+<div style="text-align: center;">
+
+    <div style="font-size: 20px; padding:20px; 
+                color:#000000;
+                font-family:Arial;
+                border: 3px solid #333;">
+        <h1>Todo List 📝</h1>
+    </div>
+
+    <div style="padding: 10px;">
+        <input id="inp"
+            type="text"
+            placeholder="Add your Todo task here"
+            style="font-size: 22px; background-color:#000; color:white; font-family:Arial;">
+        
+        <button onclick="addTodo()"
+            style="font-size: 22px; background-color:#111; color:#c4c4c4;">
+            Add Task
+        </button>
+    </div>
+
+    <div id="todos" style="margin-top:20px;"></div>
+
+</div>
+
+<script>
+let todos = [];
+
+function addTodo(){
+    const input = document.querySelector("#inp");
+    const value = input.value;
+
+    if(value === "") return; 
+
+    todos.push({
+        title: value
+    });
+
+    input.value = ""; 
+    render();
+}
+
+function createTodo(todo){
+    const div = document.createElement("div");
+
+    const span = document.createElement("span");
+    span.innerText = todo.title;
+
+    const button = document.createElement("button");
+    button.innerText = "Delete";
+
+    button.onclick = function(){
+        removeTodo(todo.title);
+    };
+
+    div.appendChild(span);
+    div.appendChild(button);
+
+    return div;
+}
+
+function removeTodo(title){
+    for(let i = 0; i < todos.length; i++){
+        if(todos[i].title === title){
+            todos.splice(i, 1);
+            break;
+        }
+    }
+    render();
+}
+
+function render(){
+    const parent = document.querySelector("#todos");
+    parent.innerHTML = "";
+
+    for(let i = 0; i < todos.length; i++){
+        const element = createTodo(todos[i]);
+        parent.appendChild(element);
+    }
+}
+</script>
+
+</body>
+</html>
