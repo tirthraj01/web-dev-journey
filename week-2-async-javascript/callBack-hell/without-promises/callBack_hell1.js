@@ -1,8 +1,5 @@
-function callBack(){
-    console.log("Hi");
-}
 
-setTimeout(function(callBack){
+setTimeout(function(){
     console.log("Hello Tirthraj")
 
     setTimeout(function() {
