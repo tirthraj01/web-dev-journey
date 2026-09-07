@@ -1,3 +1,6 @@
+"use client"
+import axios from "axios";
+
 export default function SignIn() {
     return <div className="text-3xl font-bold underline" 
     style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
@@ -6,7 +9,7 @@ export default function SignIn() {
             <input type="password" placeholder="Password" className="border m-2" />
 
             <button onClick={() => {
-                
+                axios.post("http://localhost:3000/api/v1/signin")
             }}>Sign In</button>
         </div>
 
